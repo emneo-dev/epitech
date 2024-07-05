@@ -1,0 +1,50 @@
+import assert from "std";
+
+export type Vec<T> = struct {
+  data: *T,
+  len: usize,
+};
+
+on Vec<T> {
+  static fn empty(): Vec<T> {
+    Vec<T> {
+      data: null,
+      len: 0,
+    }
+  }
+
+  fn free() {
+    self->data.free();
+  }
+
+  mut fn push(val: *T) {
+    self->data.realloc(self->len + 1);
+    self->set(self->len, val);
+    self->len += 1;
+  }
+
+  mut fn pop(): *T {
+    @if check_bounds {
+      assert(self->len > 0, "pop on empty Vec");
+    }
+
+    self->len -= 1;
+    self->get(self->len)
+  }
+
+  mut fn get(i: usize): *T {
+    @if check_bounds {
+      assert(i < self->len, "index out of bounds");
+    }
+
+    self->data.offset(i)
+  }
+
+  mut fn set(i: usize, v: *T) {
+    @if check_bounds {
+      assert(i < self->len, "index out of bounds");
+    }
+
+    self->data.offset(i).write(v);
+  }
+}

@@ -1,0 +1,23 @@
+export type Ptr<T> ~ *T;
+
+on Ptr<T> {
+  fn write(val: *T) {
+    /* built-in */
+    /* memcpy(*self, val, T.sizeof()); */
+  }
+
+  fn offset(i: usize): *T {
+    /* built-in */
+    /* *self + i */
+  }
+
+  mut fn realloc(new_size: usize) {
+    /* built-in */
+    /* *self = realloc(*self, new_size * T.sizeof()); */
+  }
+
+  fn free() {
+    /* built-in */
+    /* free(self); */
+  }
+}

@@ -1,0 +1,96 @@
+/* This grammar definition uses the W3C EBNF syntax. */
+/* See: https://www.w3.org/TR/2008/REC-xml-20081126/#sec-notation */
+
+Program ::= Definition*
+
+Definition ::= FnDef
+
+FnDef ::= "fn" Ident "(" FieldDef? ")" ":" Type BlockExpr
+
+Expr ::=
+  | Ident
+  | BlockExpr
+  | IfExpr
+  | WhileExpr
+  | ForExpr
+  | FnCallExpr
+  | BinopExpr
+  | UnopExpr
+  | LitExpr
+  | "(" Expr? ")"
+
+BlockExpr ::= "{" (Stmt ";")* Expr? "}"
+
+IfExpr ::= "if" Expr BlockExpr ("else" "if" BlockExpr)* ("else" Expr)?
+
+WhileExpr ::= "while" Expr BlockExpr
+
+ForExpr ::= "for" Stmt "," Expr "," Expr BlockExpr
+
+FnCallExpr ::= Expr "(" ExprList? ")"
+
+ExprList ::= Expr ("," Expr)* ","?
+
+// TODO: Make precedence explicit in the grammar.
+BinopExpr ::=
+  | Expr "==" Expr
+  | Expr "!=" Expr
+  | Expr "<" Expr
+  | Expr ">" Expr
+  | Expr "+" Expr
+  | Expr "-" Expr
+  | Expr "*" Expr
+  | Expr "/" Expr
+  | Expr "=" Expr
+
+UnopExpr ::=
+  | "!" Expr
+  | "-" Expr
+
+LitExpr ::=
+  | DecimalLit
+  | HexLit
+  | FloatLit
+
+Stmt ::=
+  | LetStmt
+  | Expr
+  | "return" Expr?
+
+LetStmt ::= "let" "mut"? Ident (":" Type)? "=" Expr
+
+Type ::= TypeName | "(" ")"
+
+TypeName ::= Primitive
+
+FieldDef ::= Ident ":" Type
+
+Primitive ::= "i32" | "f64"
+
+DecimalLit ::= Digit+
+
+HexLit ::= "0x" HexDigit+
+
+FloatLit ::=
+  | Digit+ "." Digit+
+  | Digit+ "."
+  | "." Digit+
+
+Digit ::= [0-9]
+
+HexDigit ::= [0-9a-fA-F]
+
+Ident ::= ([a-zA-Z_][a-zA-Z0-9_]*) - Keyword
+
+Keyword ::=
+  | Primitive
+  | "fn"
+  | "mut"
+  | "let"
+  | "if"
+  | "else"
+  | "while"
+  | "for"
+  | "return"
+  | "break"
+  | "continue"

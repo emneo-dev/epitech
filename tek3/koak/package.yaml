@@ -1,0 +1,68 @@
+name: koak
+version: 0.1.0.0
+github: "nasso/koak"
+license: BSD3
+author: "nasso"
+maintainer: "nassomails@gmail.com"
+copyright: "2021 nasso"
+
+extra-source-files:
+  - README.md
+  - ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Programming Language
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:
+  Please see the README on GitHub at <https://github.com/nasso/koak#readme>
+
+dependencies:
+  - base >= 4.14 && < 5
+  - mtl >= 2.2 && < 2.3
+  - transformers >= 0.5 && < 0.6
+  - unordered-containers >= 0.2 && < 0.3
+  - comparse >= 0.2 && < 0.3
+  - llvm-hs >= 9.0.1 && < 9.1
+  - llvm-hs-pure >= 9.0 && < 9.1
+  - bytestring >= 0.10 && < 0.11
+  - optparse-applicative >= 0.16 && < 0.18
+  - directory >= 1.3.6 && < 1.4
+  - temporary >= 1.3 && < 1.4
+  - process >= 1.6 && < 1.7
+  - exceptions >= 0.10 && < 0.11
+  - file-embed >= 0.0.15 && < 0.0.16
+
+library:
+  source-dirs: src
+  ghc-options: -Wall
+
+executables:
+  koak:
+    main: Main.hs
+    source-dirs: app
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+      - -Wall
+    dependencies:
+      - koak
+      - filepath >= 1.4 && < 1.5
+
+tests:
+  koak-test:
+    main: Spec.hs
+    source-dirs: test
+    ghc-options:
+      - -threaded
+      - -rtsopts
+      - -with-rtsopts=-N
+      - -Wall
+    dependencies:
+      - koak
+      - tasty >= 1.4 && < 2
+      - tasty-hunit >= 0.10 && < 1
