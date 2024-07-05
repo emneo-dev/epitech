@@ -1,0 +1,29 @@
+name: Make (docker epitest)
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  linux-make:
+    name: Make (Linux epitest docker)
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Make
+        shell: bash
+        run: make
+
+  deploy-epitech:
+    name: Deploy (deploy on epitech repo organization)
+    needs: linux-make
+    runs-on: ubuntu-latest
+    steps:
+      - uses: wearerequired/git-mirror-action@v1
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SECRET_KEY }}
+        with:
+          source-repo: "git@github.com:huntears/my_teams.git"
+          destination-repo: "git@github.com:EpitechIT2020/B-NWP-400-TLS-4-1-myteams-alexandre.flion.git"
