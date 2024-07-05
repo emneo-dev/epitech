@@ -1,0 +1,17 @@
+name: Make (docker epitest)
+on:
+  push:
+    branches:
+      - master
+jobs:
+  linux-make:
+    name: Make (Epitest docker)
+    runs-on: ubuntu-20.04
+    container: docker://epitechcontent/epitest-docker:latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Make
+        shell: bash
+        run: make
