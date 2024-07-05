@@ -20,3 +20,6 @@ I started Epitech during the year 2019/2020, therefore quite a lot of things
 have changed and much stuff from here will not be relevant anymore.
 A project might be updated to reflect the new changes but don't count on that
 too much (The status of a project will always be explicit in its readme).
+
+PS: If something changed about a project open an issue about it and I'll try to
+fix it as soon as possible.
