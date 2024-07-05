@@ -1,0 +1,31 @@
+jenkins:
+  systemMessage: "Whanos Jenkins Instance."
+  remotingSecurity:
+    enabled: true
+
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: "admin"
+          description: "Admin User"
+          name: "Admin"
+          password: ${USER_ADMIN_PASSWORD}
+
+  authorizationStrategy:
+    roleBased:
+      roles:
+        global:
+          - name: "Admin"
+            description: "Whanos master"
+            permissions:
+              - "Overall/Administer"
+            assignments:
+              - "admin"
+
+jobs:
+  - file: job_dsl.groovy
+
+security:
+  globalJobDslSecurityConfiguration:
+    useScriptSecurity: false

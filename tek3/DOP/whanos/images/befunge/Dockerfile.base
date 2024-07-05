@@ -1,0 +1,8 @@
+FROM esolang/befunge93
+
+SHELL ["/bin/bash", "-c"]
+WORKDIR /app
+
+ONBUILD COPY . .
+
+CMD ["/root/bef", "app/main.bf"]

@@ -1,0 +1,11 @@
+FROM maven:3-openjdk-17
+SHELL ["/bin/bash", "-c"]
+WORKDIR /app
+COPY . .
+RUN mvn -B -f /app/app/pom.xml package
+
+FROM openjdk:17
+SHELL ["/bin/bash", "-c"]
+WORKDIR /app
+COPY --from=0 /app/app/target/app.jar .
+CMD ["java", "-jar", "app.jar"]

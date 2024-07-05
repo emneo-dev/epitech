@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: poll-deployment
+  namespace: default
+  labels:
+    app: poll
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: poll
+  template:
+    metadata:
+      labels:
+        app: poll
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: poll
+          image: epitechcontent/t-dop-600-poll:k8s
+
+          # Expose port 80
+          ports:
+            - containerPort: 80
+
+          # Set REDIS_HOST from the config map
+          envFrom:
+            - configMapRef:
+                name: redis-config
+
+          # Mandatory resource limits
+          resources:
+            limits:
+              memory: "128M"
+              cpu: "250m"
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: app
+                    operator: In
+                    values: [poll]
+              topologyKey: "kubernetes.io/hostname"

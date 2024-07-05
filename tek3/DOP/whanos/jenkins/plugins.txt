@@ -1,0 +1,11 @@
+cloudbees-folder
+conditional-buildstep
+configuration-as-code
+credentials
+envinject
+git
+job-dsl
+role-strategy
+script-security
+structs
+ws-cleanup

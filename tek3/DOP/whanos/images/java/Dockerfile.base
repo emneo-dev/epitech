@@ -1,0 +1,9 @@
+FROM maven:3-openjdk-17
+
+SHELL ["/bin/bash", "-c"]
+WORKDIR /app
+
+ONBUILD COPY . .
+ONBUILD RUN mvn -B -f /app/app/pom.xml package
+
+CMD ["java", "-jar", "app/target/app.jar"]

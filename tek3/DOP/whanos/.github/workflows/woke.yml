@@ -1,0 +1,12 @@
+name: Synchronise main to master
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: git push -f origin master:main
