@@ -1,0 +1,6 @@
+*.o
+libmy.a
+my.h
+unit-test
+*.gcda
+*.gcno

@@ -1,0 +1,4 @@
+Makefile
+*.gcno
+*.gcda
+unit_tests

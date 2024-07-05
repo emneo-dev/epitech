@@ -1,0 +1,7 @@
+*.o
+libmy.a
+include/my.h
+unit-test
+*.gcda
+*.gcno
+rush3
