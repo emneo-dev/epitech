@@ -1,0 +1,12 @@
+{
+   <nvidia_drivers>
+   Memcheck:Leak
+   ...
+   obj:**nvidia**
+}
+{
+   <openal>
+   Memcheck:Leak
+   ...
+   obj:**openal**
+}

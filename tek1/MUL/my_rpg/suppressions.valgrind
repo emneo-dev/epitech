@@ -1,0 +1,6 @@
+{
+   <nvidia_drivers>
+   Memcheck:Leak
+   ...
+   obj:**nvidia**
+}
