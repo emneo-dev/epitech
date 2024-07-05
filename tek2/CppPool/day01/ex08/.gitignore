@@ -1,0 +1,5 @@
+*
+!.gitignore
+!log_config.c
+!log.c
+!log.h

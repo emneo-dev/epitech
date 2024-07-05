@@ -1,0 +1,105 @@
+@startuml
+
+class DrawInfo {
+    int x
+    int y
+    int width
+    int height
+    DrawInfo &operator =(const DrawInfo &obj)
+}
+
+HostnameUsernameMonitorModule <|-- MonitorModule
+OSNameKernelVersionMonitorModule <|-- MonitorModule
+DateTimeMonitorModule <|-- MonitorModule
+RAMMonitorModule <|-- MonitorModule
+CPUMonitorModule <|-- MonitorModule
+NetworkLoadMonitorModule <|-- MonitorModule
+MonitorModule <|-- IMonitorModule
+
+class HostnameUsernameMonitorModule {
+    HostnameMonitorModule()
+    void draw()
+    void draw(sf::RenderWindow &window)
+}
+
+class OSNameKernelVersionMonitorModule {
+    OSNameKernelVersionMonitorModule()
+    void draw()
+    void draw(sf::RenderWindow &window)
+}
+
+class DateTimeMonitorModule {
+    DateTimeMonitorModule()
+    void draw()
+    void draw(sf::RenderWindow &window)
+}
+
+class CPUMonitorModule {
+    CPUMonitorModule()
+    void draw()
+    void draw(sf::RenderWindow &window)
+}
+
+class RAMMonitorModule {
+    RAMMonitorModule()
+    void draw()
+    void draw(sf::RenderWindow &window)
+}
+
+class NetworkLoadMonitorModule {
+    NetworkLoadMonitorModule()
+    void draw()
+    void draw(sf::RenderWindow &window)
+}
+
+abstract MonitorModule {
+    MonitorModule()
+    void setDrawInfo(const DrawInfo &infos)
+    DrawInfo getDrawInfo()
+    DrawInfo infos
+}
+
+interface IMonitorModule {
+    IMonitorModule()
+    void draw()
+    void draw(sf::RenderWindow &window)
+    void setDrawInfo(const DrawInfo &infos)
+    DrawInfo getDrawInfo()
+}
+
+TerminalMonitorDisplay <|-- MonitorDisplay
+GraphicalMonitorDisplay <|-- MonitorDisplay
+MonitorDisplay <|-- IMonitorDisplay
+
+class TerminalMonitorDisplay {
+    MonitorDisplay(const DrawInfo &infos)
+    void draw()
+    void setDrawInfo(const DrawInfo &infos)
+    DrawInfo getDrawInfo()
+    DrawInfo infos
+}
+
+class GraphicalMonitorDisplay {
+    MonitorDisplay(const DrawInfo &infos)
+    void draw()
+    void setDrawInfo(const DrawInfo &infos)
+    DrawInfo getDrawInfo()
+    DrawInfo infos
+    sf::RenderWindow window
+}
+
+abstract MonitorDisplay {
+    void addModule()
+    void removeModule()
+}
+
+interface IMonitorDisplay {
+    IMonitorDisplay(const DrawInfo &infos)
+    void addModule()
+    void removeModule()
+    void setDrawInfo(const DrawInfo &infos)
+    DrawInfo getDrawInfo()
+    void draw()
+}
+
+@enduml

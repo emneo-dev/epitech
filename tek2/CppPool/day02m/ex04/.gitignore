@@ -1,0 +1,5 @@
+*
+!.gitignore
+!add.c
+!div.c
+!castmania.c

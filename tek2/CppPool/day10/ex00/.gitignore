@@ -1,0 +1,6 @@
+Makefile
+*.o
+*.out
+main.cpp
+CMakeLists.txt
+cmake-build-debug

@@ -1,0 +1,21 @@
+# binaries
+a.out
+MyGKrellm
+
+# compil
+*/include/lib/*/*.h
+*.o
+*.a
+
+# tests
+unit_tests
+*.gcda
+*.gcno
+*.log
+
+# debug
+vgcore.*
+valgrind.supp
+
+# vscode
+.vscode

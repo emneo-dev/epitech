@@ -1,0 +1,9 @@
+*.o
+*.a
+main.c
+*.out
+.vscode
+unit_tests
+*.gcda
+*.gcno
+vgcore*

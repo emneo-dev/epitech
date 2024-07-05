@@ -1,0 +1,7 @@
+double_list.h
+main.c
+a.out
+vgcore*
+*.h
+tests
+main.c.old
