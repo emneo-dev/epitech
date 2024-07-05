@@ -1,0 +1,44 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    name: Build
+    runs-on: [ubuntu-latest]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build project
+        env:
+          CC: gcc-8
+        run: make
+
+  test:
+
+    name: Test
+    needs: [build]
+    runs-on: [ubuntu-latest]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build project
+        env:
+          CC: gcc-8
+        run: make unit_tests
+
+      - name: Run tests without LD_PRELOAD
+        run: ./unit_tests
+
+      - name: Run tests with LD_PRELOAD
+        env:
+          CC: gcc-8
+          LD_PRELOAD: ./libmy_malloc.so
+        run: ./unit_tests

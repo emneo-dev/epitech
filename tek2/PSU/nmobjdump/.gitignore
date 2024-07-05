@@ -1,0 +1,10 @@
+*.o
+nm_unit_tests
+objdump_unit_tests
+my_objdump
+my_nm
+*.gcda
+*.gcno
+.vscode
+issou.c
+NormEZ.rb

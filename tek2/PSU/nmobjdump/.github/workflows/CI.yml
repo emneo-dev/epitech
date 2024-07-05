@@ -1,0 +1,27 @@
+name: C CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    name: Build
+    runs-on: [ubuntu-latest]
+    container: epitechcontent/epitest-docker:latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build project
+        run: make
+
+  test:
+
+    name: Test
+    needs: [build]
+    runs-on: [ubuntu-latest]
+    container: epitechcontent/epitest-docker:latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build and run tests
+        run: make tests_run -j2
