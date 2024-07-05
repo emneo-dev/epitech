@@ -1,0 +1,7 @@
+*.o
+*.a
+*.gcda
+*.gcno
+mysh
+unit_tests
+*.d

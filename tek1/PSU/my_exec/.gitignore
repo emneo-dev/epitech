@@ -1,0 +1,4 @@
+my_exec
+*.o
+a.out
+.vscode

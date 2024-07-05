@@ -1,0 +1,5 @@
+my_sokoban
+*.o
+*.gcda
+*.gcno
+.vscode

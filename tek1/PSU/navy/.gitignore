@@ -1,0 +1,7 @@
+*.o
+*.gcda
+*.gcno
+navy
+unit_tests
+*.a
+.vscode

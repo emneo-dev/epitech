@@ -1,0 +1,4 @@
+*.o
+*.a
+info_file
+.vscode
