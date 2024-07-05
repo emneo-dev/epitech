@@ -1,0 +1,24 @@
+# Github action workflow file for launching tests with haskell stack
+
+name: Tests
+
+on:
+  - push
+  - pull_request
+  - workflow_dispatch
+
+jobs:
+  launch_tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v2
+      - name: Test
+        run: stack test
+  compile:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v2
+      - name: Compile
+        run: make
