@@ -1,0 +1,7 @@
+*.a
+unit_tests
+bsq
+*.o
+.vscode
+*.gcda
+*.gcno

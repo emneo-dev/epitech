@@ -1,0 +1,8 @@
+*.o
+matchstick
+*.gcda
+*.gcno
+unit_tests
+*.a
+doc
+.vscode

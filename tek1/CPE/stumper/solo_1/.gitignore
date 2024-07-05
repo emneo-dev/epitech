@@ -1,0 +1,5 @@
+*.o
+hidenp
+*.gcda
+*.gcno
+unit_tests

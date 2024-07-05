@@ -1,0 +1,230 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-I./include",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-fno-builtin",
+      "-Werror",
+      "-g3",
+      "-c",
+      "-o",
+      "src/load_file_to_mem.o",
+      "src/load_file_to_mem.c"
+    ],
+    "directory": "/home/huntears/programs/tek1/CPE_BSQ_2019",
+    "file": "/home/huntears/programs/tek1/CPE_BSQ_2019/src/load_file_to_mem.c",
+    "output": "/home/huntears/programs/tek1/CPE_BSQ_2019/src/load_file_to_mem.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-I./include",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-fno-builtin",
+      "-Werror",
+      "-g3",
+      "-c",
+      "-o",
+      "src/get_number.o",
+      "src/get_number.c"
+    ],
+    "directory": "/home/huntears/programs/tek1/CPE_BSQ_2019",
+    "file": "/home/huntears/programs/tek1/CPE_BSQ_2019/src/get_number.c",
+    "output": "/home/huntears/programs/tek1/CPE_BSQ_2019/src/get_number.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-I./include",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-fno-builtin",
+      "-Werror",
+      "-g3",
+      "-c",
+      "-o",
+      "src/is_upper_side.o",
+      "src/is_upper_side.c"
+    ],
+    "directory": "/home/huntears/programs/tek1/CPE_BSQ_2019",
+    "file": "/home/huntears/programs/tek1/CPE_BSQ_2019/src/is_upper_side.c",
+    "output": "/home/huntears/programs/tek1/CPE_BSQ_2019/src/is_upper_side.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-I./include",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-fno-builtin",
+      "-Werror",
+      "-g3",
+      "-c",
+      "-o",
+      "src/is_left_side.o",
+      "src/is_left_side.c"
+    ],
+    "directory": "/home/huntears/programs/tek1/CPE_BSQ_2019",
+    "file": "/home/huntears/programs/tek1/CPE_BSQ_2019/src/is_left_side.c",
+    "output": "/home/huntears/programs/tek1/CPE_BSQ_2019/src/is_left_side.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-I./include",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-fno-builtin",
+      "-Werror",
+      "-g3",
+      "-c",
+      "-o",
+      "src/my_set_value.o",
+      "src/my_set_value.c"
+    ],
+    "directory": "/home/huntears/programs/tek1/CPE_BSQ_2019",
+    "file": "/home/huntears/programs/tek1/CPE_BSQ_2019/src/my_set_value.c",
+    "output": "/home/huntears/programs/tek1/CPE_BSQ_2019/src/my_set_value.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-I./include",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-fno-builtin",
+      "-Werror",
+      "-g3",
+      "-c",
+      "-o",
+      "src/loop_value.o",
+      "src/loop_value.c"
+    ],
+    "directory": "/home/huntears/programs/tek1/CPE_BSQ_2019",
+    "file": "/home/huntears/programs/tek1/CPE_BSQ_2019/src/loop_value.c",
+    "output": "/home/huntears/programs/tek1/CPE_BSQ_2019/src/loop_value.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-I./include",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-fno-builtin",
+      "-Werror",
+      "-g3",
+      "-c",
+      "-o",
+      "src/get_shortest.o",
+      "src/get_shortest.c"
+    ],
+    "directory": "/home/huntears/programs/tek1/CPE_BSQ_2019",
+    "file": "/home/huntears/programs/tek1/CPE_BSQ_2019/src/get_shortest.c",
+    "output": "/home/huntears/programs/tek1/CPE_BSQ_2019/src/get_shortest.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-I./include",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-fno-builtin",
+      "-Werror",
+      "-g3",
+      "-c",
+      "-o",
+      "src/get_highest.o",
+      "src/get_highest.c"
+    ],
+    "directory": "/home/huntears/programs/tek1/CPE_BSQ_2019",
+    "file": "/home/huntears/programs/tek1/CPE_BSQ_2019/src/get_highest.c",
+    "output": "/home/huntears/programs/tek1/CPE_BSQ_2019/src/get_highest.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-I./include",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-fno-builtin",
+      "-Werror",
+      "-g3",
+      "-c",
+      "-o",
+      "src/display_bsq.o",
+      "src/display_bsq.c"
+    ],
+    "directory": "/home/huntears/programs/tek1/CPE_BSQ_2019",
+    "file": "/home/huntears/programs/tek1/CPE_BSQ_2019/src/display_bsq.c",
+    "output": "/home/huntears/programs/tek1/CPE_BSQ_2019/src/display_bsq.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-I./include",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-fno-builtin",
+      "-Werror",
+      "-g3",
+      "-c",
+      "-o",
+      "src/convert_to_v2.o",
+      "src/convert_to_v2.c"
+    ],
+    "directory": "/home/huntears/programs/tek1/CPE_BSQ_2019",
+    "file": "/home/huntears/programs/tek1/CPE_BSQ_2019/src/convert_to_v2.c",
+    "output": "/home/huntears/programs/tek1/CPE_BSQ_2019/src/convert_to_v2.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-I./include",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-fno-builtin",
+      "-Werror",
+      "-g3",
+      "-c",
+      "-o",
+      "src/is_in_square.o",
+      "src/is_in_square.c"
+    ],
+    "directory": "/home/huntears/programs/tek1/CPE_BSQ_2019",
+    "file": "/home/huntears/programs/tek1/CPE_BSQ_2019/src/is_in_square.c",
+    "output": "/home/huntears/programs/tek1/CPE_BSQ_2019/src/is_in_square.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/cc",
+      "-I./include",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-fno-builtin",
+      "-Werror",
+      "-g3",
+      "-c",
+      "-o",
+      "src/bsq.o",
+      "src/bsq.c"
+    ],
+    "directory": "/home/huntears/programs/tek1/CPE_BSQ_2019",
+    "file": "/home/huntears/programs/tek1/CPE_BSQ_2019/src/bsq.c",
+    "output": "/home/huntears/programs/tek1/CPE_BSQ_2019/src/bsq.o"
+  }
+]
