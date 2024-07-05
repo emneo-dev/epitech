@@ -1,0 +1,74 @@
+#!/usr/bin/env python3
+
+import sys
+import numpy
+
+def helper():
+    print("USAGE")
+    print("\t./106bombyx n [k | i0 i1]")
+    print("")
+    print("DESCRIPTION")
+    print("\tn\tnumber of first generation individuals")
+    print("\tk\tgrowth rate from 1 to 4")
+    print("\ti0\tinitial generation (included)")
+    print("\ti1\tfinal generation (included)")
+
+def arg_checker():
+    if len(sys.argv) != 4 and len(sys.argv) != 3:
+        helper()
+        exit(84)
+    if sys.argv[1] == "-h" or sys.argv[1] == "--help":
+        helper()
+        exit(0)
+    if len(sys.argv) == 3:
+        try:
+            if float(sys.argv[2]) < 1 or float(sys.argv[2]) > 4:
+                helper()
+                exit(84)
+            if int(sys.argv[1]) < 1 or int(sys.argv[1]) > 100:
+                helper()
+                exit(84)
+        except ValueError:
+            helper()
+            exit(84)
+    if len(sys.argv) == 4:
+        try:
+            if int(sys.argv[1]) < 0:
+                helper()
+                exit(84)
+            if int(sys.argv[2]) < 0:
+                helper()
+                exit(84)
+            if int(sys.argv[3]) < int(sys.argv[2]):
+                helper()
+                exit(84)
+        except ValueError:
+            helper()
+            exit(84)
+
+def easy_bombyx(xindex, value, mulfactor):
+    if xindex == 100:
+        return
+    xindex += 1
+    print("%d %.2f" %(xindex, value))
+    easy_bombyx(xindex, mulfactor * value * ((1000 - value) / 1000), mulfactor)
+
+def hard_bombyx_recur(xindex, value, mulfactor):
+    while 1:
+        if xindex == float(sys.argv[3]):
+            return
+        xindex += 1
+        if xindex >= int(sys.argv[2]):
+            print("%.2f %.2f" %(mulfactor, value))
+        value = mulfactor * value * ((1000 - value) / 1000)
+
+def hard_bombyx():
+    for i in numpy.arange(1.0, 4.0, 0.01):
+        hard_bombyx_recur(0, float(sys.argv[1]), i)
+
+if __name__ == "__main__":
+    arg_checker()
+    if len(sys.argv) == 3:
+        easy_bombyx(0, float(sys.argv[1]), float(sys.argv[2]))
+    if len(sys.argv) == 4:
+        hard_bombyx()

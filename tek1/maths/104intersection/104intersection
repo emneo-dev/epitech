@@ -1,0 +1,127 @@
+#!/usr/bin/env python3
+
+from math import sqrt
+from sys import argv
+from math import tan, radians
+
+def sphere(radius_sphere, xp, yp, zp, xv, yv, zv):
+    a = xv * xv + yv * yv + zv * zv
+    b = 2 * ( xv * xp + yv * yp + zv * zp)
+    c = xp * xp + yp * yp + zp * zp - radius_sphere * radius_sphere
+    d = b * b - 4 * a * c
+    print("Sphere of radius " + str(radius_sphere))
+    print("Line passing through the point (" + str(xp) + ", " + str(yp) + ", " + str(zp) + ") and parallel to the vector (" + str(xv) + ", " + str(yv) + ", " + str(zv) + ")")
+    if d < 0:
+        print("No intersection point.")
+    elif d == 0:
+        print("1 intersection point:")
+        t = -b / (2 * a)
+        x = xp + xv * t
+        y = yp + yv * t
+        z = zp + zv * t
+        print("({0:.3f}, {1:.3f}, {2:.3f})".format(x, y, z))
+    else:
+        print("2 intersection points:")
+        t = (-b + sqrt(d)) / (2 * a)
+        x = xp + xv * t
+        y = yp + yv * t
+        z = zp + zv * t
+        print("({0:.3f}, {1:.3f}, {2:.3f})".format(x, y, z))
+        t = (-b - sqrt(d)) / (2 * a)
+        x = xp + xv * t
+        y = yp + yv * t
+        z = zp + zv * t
+        print("({0:.3f}, {1:.3f}, {2:.3f})".format(x, y, z))
+
+def cylinder(radius_cylinder, xp, yp, zp, xv, yv, zv):
+    a = xv * xv + yv * yv
+    b = (2 * xp * xv) + (2 * yp * yv)
+    c = xp * xp + yp * yp - radius_cylinder * radius_cylinder
+    d = b * b - 4 * a * c
+    print("Cylinder of radius " + str(radius_cylinder))
+    print("Line passing through the point (" + str(xp) + ", " + str(yp) + ", " + str(zp) + ") and parallel to the vector (" + str(xv) + ", " + str(yv) + ", " + str(zv) + ")")
+    if (a == 0):
+        print("There is an infinite number of intersection points.")
+        return 0
+    if d < 0:
+        print("No intersection point.")
+    elif d == 0:
+        print("1 intersection point:")
+        t = -b / (2 * a)
+        x = xp + xv * t
+        y = yp + yv * t
+        z = zp + zv * t
+        print("({0:.3f}, {1:.3f}, {2:.3f})".format(x, y, z))
+    else:
+        print("2 intersection points:")
+        t = (-b + sqrt(d)) / (2 * a)
+        x = xp + xv * t
+        y = yp + yv * t
+        z = zp + zv * t
+        print("({0:.3f}, {1:.3f}, {2:.3f})".format(x, y, z))
+        t = (-b - sqrt(d)) / (2 * a)
+        x = xp + xv * t
+        y = yp + yv * t
+        z = zp + zv * t
+        print("({0:.3f}, {1:.3f}, {2:.3f})".format(x, y, z))
+
+def cone(angle, xp, yp, zp, xv, yv, zv):
+    old_angle = angle
+    tan_angle = tan(radians(angle))
+    a = xv * xv + yv * yv - (zv * zv * (tan_angle * tan_angle))
+    b = (2 * xp * xv) + (2 * yp * yv) - ((2 * zp * zv) * (tan_angle * tan_angle))
+    c = xp * xp + yp * yp - ((zp * zp) * (tan_angle * tan_angle))
+    d = b * b - 4 * a * c
+    print("Cone with a " + str(old_angle) + " degree angle")
+    print("Line passing through the point (" + str(xp) + ", " + str(yp) + ", " + str(zp) + ") and parallel to the vector (" + str(xv) + ", " + str(yv) + ", " + str(zv) + ")")
+    if (a == 0):
+        print("There is an infinite number of intersection points.")
+        return 0
+    if d < 0:
+        print("No intersection point.")
+    elif d == 0:
+        print("1 intersection point:")
+        t = -b / (2 * a)
+        x = xp + xv * t
+        y = yp + yv * t
+        z = zp + zv * t
+        print("({0:.3f}, {1:.3f}, {2:.3f})".format(x, y, z))
+    else:
+        print("2 intersection points:")
+        t = (-b + sqrt(d)) / (2 * a)
+        x = xp + xv * t
+        y = yp + yv * t
+        z = zp + zv * t
+        print("({0:.3f}, {1:.3f}, {2:.3f})".format(x, y, z))
+        t = (-b - sqrt(d)) / (2 * a)
+        x = xp + xv * t
+        y = yp + yv * t
+        z = zp + zv * t
+        print("({0:.3f}, {1:.3f}, {2:.3f})".format(x, y, z))
+
+def main():
+    if len(argv) != 9:
+        exit(84)
+    try:
+        int(argv[1])
+        int(argv[2])
+        int(argv[3])
+        int(argv[4])
+        int(argv[5])
+        int(argv[6])
+        int(argv[7])
+        int(argv[8])
+    except ValueError:
+        exit(84)
+    if (int(argv[1]) not in [1, 2, 3]):
+        exit(84)
+    if (int(argv[1]) == 1):
+        sphere(int(argv[8]), int(argv[2]), int(argv[3]), int(argv[4]), int(argv[5]), int(argv[6]), int(argv[7]))
+    elif (int(argv[1]) == 2):
+        cylinder(int(argv[8]), int(argv[2]), int(argv[3]), int(argv[4]), int(argv[5]), int(argv[6]), int(argv[7]))
+    else:
+        cone(int(argv[8]), int(argv[2]), int(argv[3]), int(argv[4]), int(argv[5]), int(argv[6]), int(argv[7]))
+    exit(0)
+
+if __name__ == "__main__":
+    main()

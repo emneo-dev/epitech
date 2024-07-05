@@ -1,0 +1,178 @@
+#!/usr/bin/env python3
+
+import sys
+from math import sqrt, factorial
+import copy
+
+operations = ["EXP", "COS", "SIN", "COSH", "SINH"]
+
+class Matrix:
+    def __init__(self, nb):
+        self.buffer = []
+        length = int(sqrt(len(nb)))
+        for i in range(length):
+            tmp = []
+            for y in range(length):
+                tmp.append(int(nb[i * length + y]))
+            self.buffer.append(tmp)
+        self.original = copy.deepcopy(self.buffer)
+
+    def compute_mul(self, x, y):
+        ret = 0
+        for i in range(len(self.buffer)):
+            ret += self.buffer[i][y] * self.original[x][i]
+        return ret
+
+    def mul_mat(self):
+        tmp = copy.deepcopy(self.buffer)
+        for x in range(len(self.buffer)):
+            for y in range(len(self.buffer)):
+                tmp[x][y] = self.compute_mul(x, y)
+        self.buffer = tmp
+
+    def it_mul(self, it):
+        for i in range(it):
+            self.mul_mat()
+
+    def add_mat(self, mat1, mat2):
+        tmp = copy.deepcopy(mat1)
+        for x in range(len(tmp)):
+            for y in range(len(tmp)):
+                tmp[x][y] += mat2[x][y]
+        return tmp
+
+    def sub_mat(self, mat1, mat2):
+        tmp = copy.deepcopy(mat1)
+        for x in range(len(tmp)):
+            for y in range(len(tmp)):
+                tmp[x][y] -= mat2[x][y]
+        return tmp
+
+    def multiply_to_mat(self, val, mat):
+        tmp = copy.deepcopy(mat)
+        for x in range(len(tmp)):
+            for y in range(len(tmp)):
+                tmp[x][y] *= val
+        return tmp
+
+    def divide_to_mat(self, val, mat):
+        tmp = copy.deepcopy(mat)
+        for x in range(len(tmp)):
+            for y in range(len(tmp)):
+                tmp[x][y] /= val
+        return tmp
+
+    def get_identity(self):
+        tmp = copy.deepcopy(self.buffer)
+        for x in range(len(tmp)):
+            for y in range(len(tmp)):
+                if x != y:
+                    tmp[x][y] = 0
+                else:
+                    tmp[x][y] = 1
+        return tmp
+
+    def exp(self):
+        base = self.get_identity()
+        for i in range(200):
+            base = self.add_mat(base, self.multiply_to_mat((1 / factorial(i + 1)), self.buffer))
+            self.mul_mat()
+        self.buffer = base
+
+    def cos(self):
+        base = self.get_identity()
+        i = 0
+        while i < 300:
+            self.mul_mat()
+            i += 2
+            base = self.sub_mat(base, self.divide_to_mat(factorial(i), self.buffer))
+            self.mul_mat()
+            self.mul_mat()
+            i += 2
+            base = self.add_mat(base, self.divide_to_mat(factorial(i), self.buffer))
+            self.mul_mat()
+        self.buffer = base
+
+    def sin(self):
+        base = copy.deepcopy(self.buffer)
+        self.mul_mat()
+        i = 1
+        while i < 300:
+            self.mul_mat()
+            i += 2
+            base = self.sub_mat(base, self.divide_to_mat(factorial(i), self.buffer))
+            self.mul_mat()
+            self.mul_mat()
+            i += 2
+            base = self.add_mat(base, self.divide_to_mat(factorial(i), self.buffer))
+            self.mul_mat()
+        self.buffer = base
+
+    def cosh(self):
+        base = self.get_identity()
+        i = 0
+        while i < 300:
+            self.mul_mat()
+            i += 2
+            base = self.add_mat(base, self.divide_to_mat(factorial(i), self.buffer))
+            self.mul_mat()
+        self.buffer = base
+
+    def sinh(self):
+        base = copy.deepcopy(self.buffer)
+        self.mul_mat()
+        i = 1
+        while i < 300:
+            self.mul_mat()
+            i += 2
+            base = self.add_mat(base, self.divide_to_mat(factorial(i), self.buffer))
+            self.mul_mat()
+        self.buffer = base
+
+    def display(self):
+        for i in self.buffer:
+            for y in range(len(i)):
+                print("%.2f" %(i[y]), end="")
+                if y + 1 != len(i):
+                    print("\t", end="")
+            print()
+
+def helper():
+    print("USAGE")
+    print("\t./108trigo fun a0 a1 a2 ...")
+    print("\nDESCRIPTION")
+    print("\tfun\tfunction to be applied, among at least \"EXP\", \"COS\", \"SIN\", \"COSH\"")
+    print("\t\tand \"SINH\"")
+    print("\tai\tcoeficients of the matrix")
+
+def main():
+    if len(sys.argv) == 2 and (sys.argv[1] == "-h" or sys.argv[1] == "--help"):
+        helper()
+        sys.exit(0)
+    if len(sys.argv) < 3 or int(sqrt(len(sys.argv[2:]))) != sqrt(len(sys.argv[2:])) or sys.argv[1] not in operations:
+        helper()
+        sys.exit(84)
+    try:
+        for i in sys.argv[2:]:
+            if int(i) != float(i):
+                helper()
+                sys.exit(84)
+    except ValueError:
+        helper()
+        sys.exit(84)
+    matrix = Matrix(sys.argv[2:])
+    if sys.argv[1] == "EXP":
+        matrix.exp()
+    elif sys.argv[1] == "COS":
+        matrix.cos()
+    elif sys.argv[1] == "SIN":
+        matrix.sin()
+    elif sys.argv[1] == "COSH":
+        matrix.cosh()
+    elif sys.argv[1] == "SINH":
+        matrix.sinh()
+    matrix.display()
+    sys.exit(0)
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,98 @@
+#!/usr/bin/python3
+
+import sys
+from math import sqrt, acos, pi
+
+class Ball:
+    def __init__(self, arr):
+        self.x0 = arr[0]
+        self.y0 = arr[1]
+        self.z0 = arr[2]
+        self.x1 = arr[3]
+        self.y1 = arr[4]
+        self.z1 = arr[5]
+        self.vx = self.x1 - self.x0
+        self.vy = self.y1 - self.y0
+        self.vz = self.z1 - self.z0
+        self.t_touch = -1
+
+    def touch_paddle(self, time):
+        if self.vz == 0:
+            if self.z0 == 0:
+                self.t_touch = 0
+                return 1
+            return 0
+        if self.z1 / -(self.vz) <= time and self.vz < 0 and self.z1 >= 0: #python3.8 would've been great here
+            self.t_touch = self.z1 / -(self.vz)
+            return 1
+        if self.z1 / self.vz <= time and self.vz > 0 and self.z1 <= 0:
+            self.t_touch = self.z1 / self.vz
+            return 1
+        return 0
+
+    def get_angle(self):
+        tmp = acos(self.vz / sqrt(self.vx * self.vx + self.vy * self.vy + self.vz * self.vz)) * 180 / pi - 90
+        if (self.vz > 0):
+            print("zbub")
+            tmp = sqrt(tmp * tmp)            
+        return tmp
+
+    def get_t_touch(self):
+        return self.t_touch
+
+def main():
+    if len(sys.argv) > 1:
+        if sys.argv[1] == "-h":
+            help()
+            sys.exit(0)
+    if len(sys.argv) != 8:
+        help()
+        sys.exit(84)
+    try:
+        tmp = int(sys.argv[7])
+    except:
+        sys.exit(84)
+    if tmp < 0 or tmp != float(sys.argv[7]):
+        sys.exit(84)
+    handle_args(sys.argv[1:])
+        
+def handle_args(argv):
+    arr = []
+    for i in argv:
+        try:
+            arr.append(float(i))
+        except ValueError:
+            sys.stderr.write("Wrong value entered\n")
+            sys.exit(84)
+    arr[6] = int(arr[6])
+    ball = Ball(arr)
+    do_maths(ball, arr[6])
+    sys.exit(0)
+
+def do_maths(ball, time):
+    print("The velocity vector of the ball is:")
+    print("(" + "{0:.2f}".format(ball.vx) + ", " + "{0:.2f}".format(ball.vy) + ", " + "{0:.2f}".format(ball.vz) + ")")
+    print("At time t + " + str(time) + ", ball coordinates will be:")
+    print("(" + "{0:.2f}".format(ball.x1 + ball.vx * time) + ", " + "{0:.2f}".format(ball.y1 + ball.vy * time) + ", " + "{0:.2f}".format(ball.z1 + ball.vz * time) + ")")
+    if ball.touch_paddle(time):
+        print("The incidence angle is:")
+        print("{0:.2f}".format(ball.get_angle()) + " degrees")
+        return 0
+    print("The ball won't reach the paddle.")
+    return 0
+
+def help():
+    print("USAGE")
+    print("    ./101pong x0 y0 z0 x1 y1 z1 n")
+    print("")
+    print("DESCRIPTION")
+    print("    x0  ball abscissa at time t - 1")
+    print("    y0  ball ordinate at time t - 1")
+    print("    z0  ball altitude at time t - 1")
+    print("    x1  ball abscissa at time t")
+    print("    y1  ball ordinate at time t")
+    print("    z1  ball ordinate at time t")
+    print("    n   time shift (greater than or equal to zero, integer)")
+
+if __name__ == "__main__":
+    main()

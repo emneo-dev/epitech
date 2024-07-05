@@ -1,0 +1,130 @@
+#!/usr/bin/python3
+
+from sys import argv, exit, stderr
+from math import cos, sin, radians
+
+class Matrix():
+    def __init__(self):
+        self.matrix = [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
+
+    def translation(self, x, y):
+        arr = [[1, 0, 0], [0, 1, 0], [float(x), float(y), 1]]
+        self.mul_mat(arr)
+    
+    def scale(self, x, y):
+        arr = [[float(x), 0, 0], [0, float(y), 0], [0, 0, 1]]
+        self.mul_mat(arr)
+    
+    def rotate(self, x):
+        arr = [[cos(radians(float(x))), sin(radians(float(x))), 0], [-sin(radians(float(x))), cos(radians(float(x))), 0], [0, 0, 1]]
+        self.mul_mat(arr)
+    
+    def reflexion(self, x):
+        x = float(x)
+        self.rotate(-x)
+        self.scale(1, -1)
+        self.rotate(x)
+
+    def compute_mul(self, x, y, xform):
+        ret = 0
+        for i in range(3):
+            ret += self.matrix[x][i] * xform[i][y]
+        return ret
+
+    def mul_mat(self, xform):
+        tmp = [[1, 0, 0], [0, 1, 0], [0, 0, 1]]
+        for x in range(3):
+            for y in range(3):
+                tmp[x][y] = self.compute_mul(x, y, xform)
+        self.matrix = tmp
+
+def is_an_arg(arg):
+    accepted_args = ["-t", "-z", "-r", "-s"]
+    if arg in accepted_args:
+        return 1
+    return 0
+
+def check_args(tab):
+    if not tab:
+        return (0)
+    try:
+        if tab[0] == "-t" or tab[0] == "-z":
+            if len(tab) < 3:
+                exit(84)
+            int(tab[1])
+            int(tab[2])
+            return check_args(tab[3:])
+        elif tab[0] == "-r" or tab[0] == "-s":
+            if len(tab) < 2:
+                exit(84)
+            int(tab[1])
+            return check_args(tab[2:])
+        else:
+            exit(84)
+    except ValueError:
+        exit(84)
+
+def handle_arg(mat, index):
+    if argv[index] == "-t":
+        print("Translation along vector (" + argv[index + 1] + ", " + argv[index + 2] + ")")
+        mat.translation(argv[index + 1], argv[index + 2])
+    elif argv[index] == "-z":
+        print("Scaling by factors " + argv[index + 1] + " and " + argv[index + 2])
+        mat.scale(argv[index + 1], argv[index + 2])
+    elif argv[index] == "-r":
+        print("Rotation by a " + argv[index + 1] + " degree angle")
+        mat.rotate(argv[index + 1])
+    else:
+        print("Reflection over an axis with an inclination angle of " + argv[index + 1] + " degrees")
+        mat.reflexion(argv[index + 1])
+
+def final_print(mat):
+    disp = mat.matrix
+    print("%-8.2f%-8.2f%.2f" % (disp[0][0], disp[1][0], disp[2][0]))
+    print("%-8.2f%-8.2f%.2f" % (disp[0][1], disp[1][1], disp[2][1]))
+    print("%-8.2f%-8.2f%.2f" % (disp[0][2], disp[1][2], disp[2][2]))
+    print("(%.2f, %.2f) => (%.2f, %.2f)" % (float(argv[1]), float(argv[2]), (disp[0][0] * float(argv[1]) + disp[1][0] * float(argv[2]) + disp[2][0]), (disp[0][1] * float(argv[1]) + disp[1][1] * float(argv[2]) + disp[2][1])))
+
+def check_validity():
+    if argv[1] == "-h":
+        helper()
+        exit(0)
+    if len(argv) < 5:
+        stderr.write("Not enough arguments\n")
+        exit(84)
+    try:
+        int(argv[1])
+        int(argv[2])
+    except ValueError:
+        exit(84)
+    check_args(argv[3:])
+    return 0
+
+def get_coordinates():
+    arr = []
+    try:
+        arr.append(int(argv[1]))
+        arr.append(int(argv[2]))
+    except ValueError:
+        stderr.write("Bad arguments\n")
+        exit(84)
+    return arr
+
+def helper():
+    print("USAGE\n    ./102architect x y transfo1 arg11 [arg12] [transfo2 arg12 [arg22]] ...\nDESCRIPTION\n    x   abscissa of the original point\n    y   ordinate of the original point\n\ntransfo arg1 [arg2]\n    -t i j  translation along vector (i, j)\n    -z m n  scaling by factors m (x-axis) and n (y-axis)\n    -r d    rotation centered in O by a d degree angle\n    -s d    reflection over the axis passing through O with an inclination angle of d degrees")
+
+def main():
+    check_validity()
+    coords = get_coordinates()
+    co = Matrix()
+    accepted_args = ["-t", "-z", "-r", "-s"]
+    i = -1
+    for value in argv[3:]:
+        i += 1
+        if value in accepted_args:
+            handle_arg(co, i + 3)
+    final_print(co)
+    exit(0)
+
+if __name__ == "__main__":
+    main()
