@@ -1,0 +1,6 @@
+*.o
+*.gcda
+*.gcno
+unit_tests
+libasm.so
+a.out
